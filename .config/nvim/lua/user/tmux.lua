@@ -1,0 +1,7 @@
+vim.api.nvim_create_user_command('TmuxAttach', function()
+  local harpoon = require('harpoon.term')
+  local session_name = vim.fn.input('Session name: ')
+  vim.cmd('silent !tmux new -d -s ' .. session_name)
+  harpoon.sendCommand(0, 'tmux a -t ' .. session_name .. '\r\n')
+  harpoon.gotoTerminal(0)
+end, {})
