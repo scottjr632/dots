@@ -5,7 +5,6 @@ local function filename_first(_, path)
   return string.format("%s\t\t%s", tail, parent)
 end
 
-
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -42,6 +41,7 @@ require('telescope').setup {
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+require("telescope").load_extension("recent_files")
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
