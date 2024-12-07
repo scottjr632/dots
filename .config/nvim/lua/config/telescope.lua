@@ -1,3 +1,11 @@
+local function filename_first(_, path)
+  local tail = vim.fs.basename(path)
+  local parent = vim.fs.dirname(path)
+  if parent == "." then return tail end
+  return string.format("%s\t\t%s", tail, parent)
+end
+
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -9,6 +17,27 @@ require('telescope').setup {
       },
     },
   },
+  pickers = {
+    git_status = { path_display = filename_first },
+    find_files = { path_display = filename_first, find_command = { "rg", "--files", "--sortr=modified" } },
+    live_grep = { path_display = filename_first, },
+    lsp_definitions = { path_display = filename_first, },
+    lsp_references = { path_display = filename_first, },
+    oldfiles = { path_display = filename_first, find_command = { "rg", "--files", "--sortr=modified" } },
+    jumplist = { path_display = filename_first },
+  },
+  extensions = {
+    recent_files = {
+      only_cwd = true,
+      path_display = filename_first,
+    },
+    frecency = {
+      path_display = filename_first,
+    },
+    pomodori = {
+      theme = 'ivy',
+    }
+  }
 }
 
 -- Enable telescope fzf native, if installed
@@ -64,24 +93,6 @@ vim.keymap.set('n', '<leader>/', function()
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
-
-local function telescope_live_grep_open_files()
-  require('telescope.builtin').live_grep {
-    grep_open_files = true,
-    prompt_title = 'Live Grep in Open Files',
-  }
-end
-vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
-vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
-vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sG', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sg', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles, { desc = '[F]ind [O]ld files' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -159,4 +170,3 @@ vim.defer_fn(function()
     },
   }
 end, 0)
-

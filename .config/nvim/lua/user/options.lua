@@ -1,8 +1,9 @@
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+-- This is actually set in lazy.nvim
+-- vim.g.mapleader = ' '
+-- vim.g.maplocalleader = ' '
 
 -- get rid of the fill chars
 vim.opt.fillchars = 'eob: '
