@@ -18,3 +18,4 @@ end)
 -- Remap the open previous buffer
 vim.api.nvim_set_keymap("n", "<C-p>", "<C-^>", { noremap = true })
 
+vim.api.nvim_set_keymap('n', '<leader>uu', '<CMD>UndotreeToggle<CR>', { desc = '[U]ndo tree toggle' })
