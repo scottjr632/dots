@@ -212,7 +212,8 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'buffer',  max_item_count = 3 },
+    { name = "supermaven" },
+    { name = 'buffer',    max_item_count = 3 },
     { name = 'path' },
     { name = 'luasnip' },
   },
