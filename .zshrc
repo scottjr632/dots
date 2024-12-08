@@ -318,6 +318,10 @@ if [ -f "$HOME/.zsh_aliases" ]; then
     source "$HOME/.zsh_aliases"
 fi
 
+if [ -f "$HOME/.zsh_secrets" ]; then
+    source "$HOME/.zsh_secrets"
+fi
+
 # =============================================================================
 #
 # Utility functions for zoxide.
