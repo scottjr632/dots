@@ -22,6 +22,8 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles, { desc = '[F]ind [O]ld files' })
 vim.keymap.set('n', '<leader>fr', require('telescope').extensions.recent_files.pick, { desc = '[F]ind [R]ecents' })
 vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
+vim.keymap.set('n', '<leader>fm', require('telescope.builtin').marks, { desc = '[F]ind [M]arks' })
+vim.keymap.set('n', '<leader>fj', require('telescope.builtin').jumplist, { desc = '[F]ind [J]umplist' })
 
 -- keymaps for diagnostics
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
