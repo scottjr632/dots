@@ -670,3 +670,6 @@ _dotctl()
 if [ "$funcstack[1]" = "_dotctl" ]; then
     _dotctl
 fi
+
+export PATH=$PATH:$(go env GOPATH)/bin
+
