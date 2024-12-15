@@ -1,6 +1,17 @@
-alias n="nvim"
+safe_rm() {
+    local response
+    echo -n "Are you sure you want to remove these files? [y/N] "
+    read response
+    if [[ "$response" =~ ^[Yy]$ ]]; then
+        command rm "$@"
+    else
+        echo "Operation cancelled"
+    fi
+}
+
+alias rm="safe_rm"
 alias vi="nvim"
 alias nv="nvim"
 alias cd="z"
 alias cat="bat"
-alias rm="rm -i"
+alias rm=safe_rm
