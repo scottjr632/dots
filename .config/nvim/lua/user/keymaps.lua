@@ -24,6 +24,12 @@ vim.keymap.set('n', '<leader>fr', require('telescope').extensions.recent_files.p
 vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
 vim.keymap.set('n', '<leader>fm', require('telescope.builtin').marks, { desc = '[F]ind [M]arks' })
 vim.keymap.set('n', '<leader>fj', require('telescope.builtin').jumplist, { desc = '[F]ind [J]umplist' })
+vim.api.nvim_set_keymap("n", "<Leader><Leader>",
+  [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]],
+  { noremap = true, silent = true })
+
+-- keymap to clear search highlight
+vim.keymap.set('n', '<ESC>', '<CMD>noh<CR>', { silent = true })
 
 -- keymaps for diagnostics
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -61,3 +67,6 @@ vim.api.nvim_set_keymap('n', 'vv', 'V', {})
 -- Move lines
 vim.api.nvim_set_keymap('n', 'J', ":m '>+1<CR>gv=gc", {})
 vim.api.nvim_set_keymap('n', 'K', ":m '<-2<CR>gv=gc", {})
+
+-- yank bank
+vim.keymap.set("n", "<leader>y", "<cmd>YankBank<CR>", { noremap = true })
