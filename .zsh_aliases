@@ -12,6 +12,7 @@ safe_rm() {
 alias rm="safe_rm"
 alias vi="nvim"
 alias nv="nvim"
+alias n="nvim"
 alias cd="z"
 alias cat="bat"
 alias rm=safe_rm
