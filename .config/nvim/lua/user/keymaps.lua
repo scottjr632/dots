@@ -65,8 +65,12 @@ vim.api.nvim_set_keymap('n', '_', '<CMD>vertical resize -5<CR>', { desc = 'Decre
 vim.api.nvim_set_keymap('n', 'vv', 'V', {})
 
 -- Move lines
-vim.api.nvim_set_keymap('n', 'J', ":m '>+1<CR>gv=gc", {})
-vim.api.nvim_set_keymap('n', 'K', ":m '<-2<CR>gv=gc", {})
+-- vim.api.nvim_set_keymap('n', 'J', ":m '>+1<CR>gv=gc", {})
+-- vim.api.nvim_set_keymap('n', 'K', ":m '<-2<CR>gv=gc", {})
 
 -- yank bank
 vim.keymap.set("n", "<leader>y", "<cmd>YankBank<CR>", { noremap = true })
+
+-- frecency
+vim.keymap.set('n', '<leader>fr', '<CMD>Telescope frecency workspace=CWD path_display={"shorten"} theme=ivy<CR>',
+  { desc = '[F][R]encency' })
