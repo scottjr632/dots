@@ -49,7 +49,7 @@ return {
         end
 
         -- Tsserver usually works poorly.
-        if client.name == 'ts_ls' or client.name == 'typescript-language-server' or client.name == 'tsserver' then
+        if client.name == 'ts_ls' or client.name == 'typescript-language-server' or client.name == 'tsserver' or client.name == 'typescript-tools' then
           return
         end
 

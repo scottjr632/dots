@@ -90,16 +90,16 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   gopls = {},
-  ts_ls = {
-    init_options = {
-      -- This is the default which would be overwritten otherwise
-      hostInfo = "neovim",
-      -- 32 gb
-      maxTsServerMemory = 32768,
-      -- Never use LSP for syntax anyway
-      tsserver = { useSyntaxServer = "never" },
-    }
-  },
+  -- ts_ls = {
+  --   init_options = {
+  --     -- This is the default which would be overwritten otherwise
+  --     hostInfo = "neovim",
+  --     -- 32 gb
+  --     maxTsServerMemory = 32768,
+  --     -- Never use LSP for syntax anyway
+  --     tsserver = { useSyntaxServer = "never" },
+  --   }
+  -- },
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   lua_ls = {
     Lua = {
