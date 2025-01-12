@@ -57,6 +57,9 @@ vim.api.nvim_set_keymap("n", "<C-p>", "<C-^>", { noremap = true })
 -- Undotree
 vim.api.nvim_set_keymap('n', '<leader>uu', '<CMD>UndotreeToggle<CR>', { desc = '[U]ndo tree toggle' })
 
+-- Git
+vim.keymap.set('n', '<leader>gg', '<CMD>G<CR>', { desc = '[G]it' })
+
 -- Make changing widths of vertical split easier
 vim.api.nvim_set_keymap('n', '+', '<CMD>vertical resize +5<CR>', { desc = 'Increase width' })
 vim.api.nvim_set_keymap('n', '_', '<CMD>vertical resize -5<CR>', { desc = 'Decrease width' })
