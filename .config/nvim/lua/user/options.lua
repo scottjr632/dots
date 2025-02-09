@@ -11,6 +11,7 @@ vim.opt.fillchars = 'eob: '
 vim.opt.laststatus = 3
 
 -- Enable relative line numbers
+vim.opt.number = true
 vim.opt.nu = true
 vim.opt.rnu = true
 

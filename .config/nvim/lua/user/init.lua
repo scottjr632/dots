@@ -1,7 +1,5 @@
+require('user.options')
 require('user.keymaps')
 require('user.highlight_yank')
-require('user.options')
 require('user.vertical_help')
-require('user.user_cmds')
-require('user.file_paths')
-require('user.zig')
+

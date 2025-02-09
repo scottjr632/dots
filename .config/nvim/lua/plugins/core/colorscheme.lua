@@ -1,4 +1,6 @@
--- Default options
+return {
+  "EdenEast/nightfox.nvim",
+  config = function()
 require('nightfox').setup({
   options = {
     -- Compiled file's destination location
@@ -45,3 +47,7 @@ require('nightfox').setup({
 
 -- setup must be called before loading
 vim.cmd("colorscheme carbonfox")
+
+
+  end
+}
