@@ -20,3 +20,12 @@ vim.api.nvim_set_keymap('n', '_', '<CMD>vertical resize -5<CR>', { desc = 'Decre
 
 -- yank bank
 vim.keymap.set("n", "<leader>y", "<cmd>YankBank<CR>", { noremap = true })
+
+-- Redo
+vim.keymap.set('n', 'U', '<C-r>', { noremap = true, silent = true, desc = 'Redo' })
+
+-- Better scrolling
+vim.api.nvim_set_keymap('n', '<C-e>', '5<C-e>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-y>', '5<C-y>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-l>', '5<C-e>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-h>', '5<C-y>', { noremap = true, silent = true })
