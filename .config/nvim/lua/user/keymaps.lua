@@ -3,7 +3,7 @@
 vim.keymap.set('n', '<leader>-', '<CMD>Oil<CR>')
 
 -- clear search highlighting on escape
-vim.keymap.set('n', '<ESC><ESC>', '<CMD>nohlsearch<CR>')
+vim.keymap.set('n', '<ESC>', '<CMD>nohlsearch<CR>', { desc = 'silent' })
 
 -- Undotree
 vim.keymap.set('n', '<leader>uu', '<CMD>UndotreeToggle<CR>')
