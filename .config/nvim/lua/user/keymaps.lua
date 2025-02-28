@@ -29,3 +29,6 @@ vim.api.nvim_set_keymap('n', '<C-e>', '5<C-e>', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<C-y>', '5<C-y>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', '5<C-e>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-h>', '5<C-y>', { noremap = true, silent = true })
+
+-- open diagnostics
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })

@@ -1,5 +1,5 @@
 -- [[ Configure LSP ]]
---
+
 --  khis function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
@@ -30,6 +30,13 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+
+  vim.diagnostic.config({
+    float = {
+      border = "rounded", -- Options: "none", "single", "double", "rounded", "solid", "shadow"
+    },
+  })
+
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
@@ -89,7 +96,7 @@ require('mason-lspconfig').setup()
 local servers = {
   -- clangd = {},
   -- pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {},
   gopls = {},
   ts_ls = {
     init_options = {
@@ -123,17 +130,17 @@ require('neodev').setup()
 --     dynamicRegistration = true,
 --   },
 -- }
---
--- local border = {
---   { '┌', 'FloatBorder' },
---   { '─', 'FloatBorder' },
---   { '┐', 'FloatBorder' },
---   { '│', 'FloatBorder' },
---   { '┘', 'FloatBorder' },
---   { '─', 'FloatBorder' },
---   { '└', 'FloatBorder' },
---   { '│', 'FloatBorder' },
--- }
+
+local border = {
+  { '┌', 'FloatBorder' },
+  { '─', 'FloatBorder' },
+  { '┐', 'FloatBorder' },
+  { '│', 'FloatBorder' },
+  { '┘', 'FloatBorder' },
+  { '─', 'FloatBorder' },
+  { '└', 'FloatBorder' },
+  { '│', 'FloatBorder' },
+}
 
 local handlers = {
   ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
@@ -151,7 +158,7 @@ mason_lspconfig.setup {
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
+      -- capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
@@ -164,9 +171,9 @@ mason_lspconfig.setup_handlers {
 vim.api.nvim_create_autocmd("User", {
   pattern = "OilActionsPost",
   callback = function(event)
-      if event.data.actions.type == "move" then
-          Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
-      end
+    if event.data.actions.type == "move" then
+      Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+    end
   end,
 })
 

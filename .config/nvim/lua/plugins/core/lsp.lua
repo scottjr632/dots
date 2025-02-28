@@ -53,7 +53,15 @@ return {
       -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
       -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
       -- See the full "keymap" documentation for information on defining your own keymap.
-      keymap = { preset = 'enter', cmdline = { preset = 'super-tab' } },
+      keymap = { preset = 'enter' },
+      cmdline = {
+        enabled = true,
+        keymap = { preset = 'super-tab' },
+        completion = {
+          ghost_text = { enabled = false },
+          menu = { auto_show = true },
+        }
+      },
 
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
