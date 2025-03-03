@@ -17,21 +17,22 @@ return {
       -- for cmp
       'saghen/blink.cmp',
     },
-    -- opts = {
-    --   servers = {
-    --     lua_ls = {},
-    --     ts_ls = {}
-    --   }
-    -- },
-    -- config = function(_, opts)
-    --   local lspconfig = require('lspconfig')
-    --   for server, config in pairs(opts.servers) do
-    --     -- passing config.capabilities to blink.cmp merges with the capabilities in your
-    --     -- `opts[server].capabilities, if you've defined it
-    --     config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-    --     lspconfig[server].setup(config)
-    --   end
-    -- end
+    opts = {
+      servers = {
+        lua_ls = {},
+        ts_ls = {},
+        eslint = {},
+      }
+    },
+    config = function(_, opts)
+      local lspconfig = require('lspconfig')
+      for server, config in pairs(opts.servers) do
+        -- passing config.capabilities to blink.cmp merges with the capabilities in your
+        -- `opts[server].capabilities, if you've defined it
+        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+        lspconfig[server].setup(config)
+      end
+    end
   },
 
   {
@@ -62,6 +63,18 @@ return {
           menu = { auto_show = true },
         }
       },
+
+      completion = {
+        menu = {
+          draw = {
+            columns = {
+              { "label", "label_description", gap = 1 }, { "kind_icon" }
+            }
+         }
+        }
+      },
+
+      signature = { enabled = true },
 
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups

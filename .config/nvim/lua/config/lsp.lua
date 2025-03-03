@@ -94,8 +94,6 @@ require('mason-lspconfig').setup()
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
-  -- pyright = {},
   rust_analyzer = {},
   gopls = {},
   ts_ls = {
@@ -108,7 +106,7 @@ local servers = {
       tsserver = { useSyntaxServer = "never" },
     }
   },
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  eslint = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -168,6 +166,15 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+require('lspconfig').eslint.setup({
+  on_attach = function (_, bufnr)
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = bufnr,
+      command = 'EslintFixAll',
+    })
+  end
+})
+
 vim.api.nvim_create_autocmd("User", {
   pattern = "OilActionsPost",
   callback = function(event)
@@ -177,72 +184,3 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
--- [[ Configure nvim-cmp ]]
--- See `:help cmp`
--- local cmp = require 'cmp'
--- local luasnip = require 'luasnip'
--- local lspkind = require('lspkind')
--- require('luasnip.loaders.from_vscode').lazy_load()
--- luasnip.config.setup {}
---
--- cmp.setup {
---   window = {
---     completion = cmp.config.window.bordered(),
---     documentation = cmp.config.window.bordered(),
---   },
---   snippet = {
---     expand = function(args)
---       luasnip.lsp_expand(args.body)
---     end,
---   },
---   completion = {
---     completeopt = 'menu,menuone,noinsert',
---   },
---   mapping = cmp.mapping.preset.insert {
---     ['<C-n>'] = cmp.mapping.select_next_item(),
---     ['<C-p>'] = cmp.mapping.select_prev_item(),
---     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
---     ['<C-f>'] = cmp.mapping.scroll_docs(4),
---     ['<C-Space>'] = cmp.mapping.complete {},
---     ['<CR>'] = cmp.mapping.confirm {
---       behavior = cmp.ConfirmBehavior.Replace,
---       select = true,
---     },
---     ['<Tab>'] = cmp.mapping(function(fallback)
---       if cmp.visible() then
---         cmp.select_next_item()
---       elseif luasnip.expand_or_locally_jumpable() then
---         luasnip.expand_or_jump()
---       else
---         fallback()
---       end
---     end, { 'i', 's' }),
---     ['<S-Tab>'] = cmp.mapping(function(fallback)
---       if cmp.visible() then
---         cmp.select_prev_item()
---       elseif luasnip.locally_jumpable(-1) then
---         luasnip.jump(-1)
---       else
---         fallback()
---       end
---     end, { 'i', 's' }),
---   },
---   sources = {
---     { name = 'nvim_lsp' },
---     { name = 'buffer',  max_item_count = 3 },
---     { name = 'path' },
---     { name = 'luasnip' },
---   },
---   formatting = {
---     expandable_indicator = true,
---     format = lspkind.cmp_format({
---       mode = "symbol_text",
---       maxwidth = 50,
---       ellipsis_char = "...",
---       symbol_map = {
---         Copilot = "",
---         Codeium = ""
---       },
---     }),
---   },
--- }
