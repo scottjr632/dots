@@ -80,11 +80,6 @@ require('which-key').register({
   ['<leader>h'] = { 'Git [H]unk' },
 }, { mode = 'v' })
 
--- mason-lspconfig requires that these setup functions are called in this order
--- before setting up the servers.
-require('mason').setup()
-require('mason-lspconfig').setup()
-
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -108,11 +103,13 @@ local servers = {
   },
   eslint = {},
   lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-      -- diagnostics = { disable = { 'missing-fields' } },
+    settings = {
+      Lua = {
+        workspace = { checkThirdParty = false },
+        telemetry = { enable = false },
+        -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+        -- diagnostics = { disable = { 'missing-fields' } },
+      },
     },
   },
 }
@@ -120,14 +117,8 @@ local servers = {
 -- Setup neovim lua configuration
 require('neodev').setup()
 
--- -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
--- capabilities.workspace = {
---   didChangeWatchedFiles = {
---     dynamicRegistration = true,
---   },
--- }
+-- blink.cmp advertises the completion capabilities supported by this client.
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 local border = {
   { '┌', 'FloatBorder' },
@@ -140,40 +131,49 @@ local border = {
   { '│', 'FloatBorder' },
 }
 
+local function with_border(handler)
+  return function(err, result, ctx, config)
+    config = vim.tbl_deep_extend('force', config or {}, { border = border })
+    return handler(err, result, ctx, config)
+  end
+end
+
 local handlers = {
-  ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-  ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+  ['textDocument/hover'] = with_border(vim.lsp.handlers.hover),
+  ['textDocument/signatureHelp'] = with_border(vim.lsp.handlers.signature_help),
 }
 
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
+-- Mason installs the configured servers; Neovim's built-in LSP API configures
+-- and enables them. mason-lspconfig v2 removed setup_handlers.
+require('mason').setup()
+require('mason-lspconfig').setup({
   ensure_installed = vim.tbl_keys(servers),
-}
+  automatic_enable = false,
+})
 
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      -- capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-      init_options = (servers[server_name] or {}).init_options,
-      handlers = handlers,
-    }
-  end,
-}
+for server_name, server_config in pairs(servers) do
+  vim.lsp.config(server_name, vim.tbl_deep_extend('force', {
+    capabilities = capabilities,
+    handlers = handlers,
+    on_attach = on_attach,
+  }, server_config))
+end
 
-require('lspconfig').eslint.setup({
-  on_attach = function (_, bufnr)
+vim.lsp.config('eslint', {
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
     vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = bufnr,
-      command = 'EslintFixAll',
+      callback = function()
+        if vim.fn.exists(':EslintFixAll') == 2 then
+          vim.cmd('EslintFixAll')
+        end
+      end,
     })
-  end
+  end,
 })
+
+vim.lsp.enable(vim.tbl_keys(servers))
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "OilActionsPost",
@@ -183,4 +183,3 @@ vim.api.nvim_create_autocmd("User", {
     end
   end,
 })
-
