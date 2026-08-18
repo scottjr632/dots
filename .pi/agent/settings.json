@@ -1,13 +1,19 @@
 {
   "lastChangelogVersion": "0.84.2",
   "theme": "dark",
-  "defaultProvider": "claude-bridge",
-  "defaultModel": "claude-opus-5",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "high",
   "enableInstallTelemetry": false,
   "defaultProjectTrust": "always",
   "tuiMode": "fullscreen",
   "packages": [
-    "npm:pi-claude-bridge"
+    "npm:pi-claude-bridge",
+    "npm:pi-web-access",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:pi-lens",
+    "npm:pi-hermes-memory",
+    "npm:pi-context-view",
+    "npm:@ff-labs/pi-fff"
   ]
 }
