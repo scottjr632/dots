@@ -1,0 +1,37 @@
+onboarding = false
+# Keep Herdr's core navigation aligned with ~/.tmux.conf.
+[keys]
+prefix = "ctrl+s"
+
+# Use tmux-style session navigation: open Herdr's workspace picker with s.
+workspace_picker = "prefix+s"
+settings = "prefix+shift+s"
+
+# Vim-style movement in the workspace picker.
+navigate_workspace_down = "j"
+navigate_workspace_up = "k"
+
+# tmux: prefix + r reloads the config. Preserve Herdr's resize mode on Shift-r.
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+
+# tmux windows correspond most closely to Herdr tabs.
+new_tab = "prefix+c"
+previous_tab = "prefix+p"
+
+# Pane navigation.
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# tmux uses | for a side-by-side split and - for a stacked split.
+split_vertical = "prefix+|"
+split_horizontal = "prefix+minus"
+
+[theme]
+name = "vesper"
+auto_switch = false
+
+[ui]
+agent_panel_sort = "priority"
