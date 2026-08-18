@@ -1,0 +1,14 @@
+{
+  "name": "resume-selector",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit -p .",
+    "test": "node --test --experimental-strip-types format.test.ts",
+    "prepare": "effect-tsgo patch"
+  },
+  "devDependencies": {
+    "@effect/tsgo": "^0.24.2",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "lastChangelogVersion": "0.84.2",
+  "theme": "dark",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-5",
+  "defaultThinkingLevel": "high",
+  "enableInstallTelemetry": false,
+  "defaultProjectTrust": "always",
+  "tuiMode": "fullscreen"
+}

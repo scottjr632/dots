@@ -1,0 +1,13 @@
+# Private and machine-local state
+auth.json
+models-store.json
+trust.json
+sessions/
+settings.json.before-*
+
+# Reinstallable or generated files
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
