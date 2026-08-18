@@ -1,0 +1,11 @@
+{
+  "askClaude": {
+    "enabled": false
+  },
+  "provider": {
+    "plan": "max",
+    "longContextExtraUsage": false,
+    "strictMcpConfig": true,
+    "pathToClaudeCodeExecutable": "/Users/scottrichardson/.local/bin/claude"
+  }
+}
