@@ -8,7 +8,15 @@ return {
     dashboard = { enabled = true },
     explorer = { enabled = true },
     indent = { enabled = true },
-    input = { enabled = true },
+    input = {
+      enabled = true,
+
+      icon = " ",
+      icon_hl = "SnacksInputIcon",
+      icon_pos = "left",
+      prompt_pos = "title",
+      win = { style = "input" },
+    },
     notifier = {
       enabled = true,
       timeout = 3000,

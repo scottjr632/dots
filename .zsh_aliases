@@ -17,3 +17,11 @@ alias cd="z"
 alias cat="bat"
 alias rm=safe_rm
 alias dt="dotctl"
+
+alias avante='nvim -c "lua vim.defer_fn(function()require(\"avante.api\").zen_mode()end, 100)"'
+alias pair='nvim . -c "lua vim.defer_fn(function()require(\"pair\").open()end, 100)"'
+
+
+# Set OPENAI_API_KEY in a private environment file.
+
+source /Users/scottrichardson/.wt/wt.sh
